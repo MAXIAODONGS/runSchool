@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>校园跑腿</title>
+    <meta name="description" content="校园跑腿"/>
+    <meta name="keywords" content="校园跑腿"/>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="css/amazeui.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/timedropper.min.css"/>
+    <link rel="stylesheet" href="css/datedropper.css"/>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/amazeui.min.js"></script>
+    <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="js/timedropper.min.js"></script>
+    <script type="text/javascript" src="js/datedropper.min.js"></script>
+    <script type="text/javascript" src="js/TimeObjectUtil.js"></script>
+
+
+</head>
+<script type="text/javascript">
+
+    $(function () {
+        $("#picktime").hide();
+        $(".radio").children('.yuan').on('click', function () {
+            $('.rdactive').removeClass('rdactive');
+            $(this).addClass("rdactive").siblings().removeClass("rdactive");
+            var gender = $(this).next().text();
+
+
+        });
+        setInterval(function () {
+            var date = $("#pickdate").val();
+            if (date !== "不限") {
+                $("#picktime").show();
+            }
+        }, 1000);
+        $("#pickdate").dateDropper({
+            animate: true,
+            format: 'Y-m-d',
+            maxYear: '2020'
+        });
+        $("#picktime").timeDropper({
+            meridians: true,
+            format: 'HH:mm'
+        });
+        //获得文本框对象
+        var t = $("#text_box");
+//初始化数量为1,并失效减
+        $('#min').attr('disabled', true);
+        //数量增加操作
+        $("#add").click(function () {
+            // 给获取的val加上绝对值，避免出现负数
+            t.val(Math.abs(parseInt(t.val())) + 1);
+            if (parseInt(t.val()) != 2) {
+                $('#min').attr('disabled', false);
+            }
+            ;
+        })
+        //数量减少操作
+        $("#min").click(function () {
+            t.val(Math.abs(parseInt(t.val())) - 1);
+            if (parseInt(t.val()) == 2) {
+                $('#min').attr('disabled', true);
+            }
+            ;
+        })
+    });
+</script>
+<body>
+<header data-am-widget="header" class="am-header am-header-default header">
+    <div class="am-header-left am-header-nav">
+        <a href="javascript:history.go(-1)" class="">
+            <i class="am-header-icon am-icon-angle-left"></i>
+        </a>
+    </div>
+    <h1 class="am-header-title"><a href="#title-link" class="" style="color: #333;">发布中心</a></h1>
+    <div class="am-header-right am-header-nav">
+        <a href="#right-link" class=""> </a>
+    </div>
+</header>
+<div class="demo" style="background: white;margin-top: 2px">
+    <span class="add_input1" style="color: gray">找人干什么： </span>
+    <select name="colId" id="install_school" class="select" style="background: white">
+
+    </select>
+</div>
+<textarea id="content" class="add_input" type="text" style="padding-left: 8px" placeholder="请描述一下您这次的目的..." cols="10"
+          rows="5"></textarea>
+
+<a href="address.html"><input class="add_input" id="address" type="text" style="height: 6%;padding-left: 8px"
+                              placeholder="请选择您要送达的地址" readonly="readonly"/></a>
+
+<div style="margin-left: 4px" class="radio"><span class="yuan rdactive"><span></span></span><span style="color: black;">不限</span>
+</div>
+<div class="radio"><span class="yuan"><span></span></span><span class="girl">限美女</span></div>
+<div class="radio"><span class="yuan"><span></span></span><span class="boy">限帅哥</span></div>
+
+<div style="background: white;margin-top: 33px;padding-bottom: 4px">
+    <span class="add_input1" style="color: gray">感谢回馈： </span>￥
+    <!--<input class="add_input1" type="number" style="padding-left: 8px;margin-left: 8px" placeholder="最低2元" value="2.0"/>-->
+
+    <input id="min" name="" type="button" value="-"/>
+    <input id="text_box" name="" type="number" value="2" style="width:30px;text-align: center" />
+    <input id="add" name="" type="button" value="+"/>
+</div>
+
+
+<div class="demo" style="background: white;margin-top: 2px">
+    <span class="add_input1" style="color: gray">期望完成时间： </span><input type="text" class="input add_input1"
+                                                                       placeholder="请点击我选择日期"
+                                                                       id="pickdate" value="不限"/><input type="text"
+                                                                                                        class="input add_input2"
+                                                                                                        id="picktime"
+                                                                                                        readonly="readonly"/>
+</div>
+<div style="width: 100%;text-align: center;margin-top: 50px">
+    <button class=" className">
+        立即发布
+    </button>
+</div>
+
+</body>
+</html>
